@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online SIP Calculator to estimate returns on your Systematic Investment Plan investments. Plan your mutual fund investments and financial goals.">
+    <meta name="keywords" content="SIP calculator, mutual fund calculator, investment calculator, financial planning, wealth calculator">
+    <meta name="author" content="Financial Tools">
+    <meta name="robots" content="index, follow">
+    <title>SIP Calculator | Plan Your Systematic Investment Returns</title>
+    <link rel="canonical" href="https://yourdomain.com/sip-calculator" />
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "SIP Calculator",
+      "description": "Calculate returns on your Systematic Investment Plan (SIP) investments",
+      "url": "https://yourdomain.com/sip-calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web"
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="SIP Calculator | Plan Your Systematic Investment Returns">
+    <meta property="og:description" content="Free online SIP Calculator to estimate returns on your Systematic Investment Plan investments.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/sip-calculator">
+    <meta property="og:image" content="https://yourdomain.com/images/sip-calculator-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SIP Calculator | Plan Your Systematic Investment Returns">
+    <meta name="twitter:description" content="Free online SIP Calculator to estimate returns on your Systematic Investment Plan investments.">
+    <meta name="twitter:image" content="https://yourdomain.com/images/sip-calculator-preview.jpg">
+    
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --light-text: #6c757d;
+            --border-color: #dee2e6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7ff;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 992px) {
+            .calculator-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .calculator-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .calculator-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .range-slider {
+            width: 100%;
+            margin-top: 10px;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .range-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #3a56d4;
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        
+        .result-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: var(--light-text);
+        }
+        
+        .result-value {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+        
+        .ad-container {
+            background-color: var(--secondary-color);
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin: 30px 0;
+            border: 1px dashed var(--border-color);
+        }
+        
+        .ad-label {
+            font-size: 12px;
+            color: var(--light-text);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        footer {
+            background-color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .footer-content {
+            text-align: center;
+            color: var(--light-text);
+            font-size: 14px;
+        }
+        
+        .disclaimer {
+            background-color: #fff8f8;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .calculator-card, .result-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content container">
+            <a href="/" class="logo">Financial Tools</a>
+            <nav>
+                <!-- Navigation can be added here -->
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <h1 style="margin-bottom: 20px; color: var(--primary-color);">SIP Calculator</h1>
+        <p style="margin-bottom: 30px; color: var(--light-text);">Plan your Systematic Investment Plan returns with this comprehensive calculator. Estimate your potential wealth creation through disciplined monthly investments.</p>
+        
+        <!-- Top Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+                crossorigin="anonymous"></script>
+            <!-- SIP Calculator Top Banner -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="calculator-container">
+            <div class="calculator-card">
+                <h2>Enter Your SIP Details</h2>
+                <form id="sipForm">
+                    <div class="form-group">
+                        <label for="monthlyInvestment">Monthly Investment (₹)</label>
+                        <input type="number" id="monthlyInvestment" class="form-control" min="500" step="500" value="5000" required>
+                        <input type="range" id="monthlyInvestmentRange" class="range-slider" min="500" max="100000" step="500" value="5000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="investmentPeriod">Investment Period (Years)</label>
+                        <input type="number" id="investmentPeriod" class="form-control" min="1" max="40" value="10" required>
+                        <input type="range" id="investmentPeriodRange" class="range-slider" min="1" max="40" value="10">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expectedReturn">Expected Return Rate (% p.a.)</label>
+                        <input type="number" id="expectedReturn" class="form-control" min="1" max="30" step="0.1" value="12" required>
+                        <input type="range" id="expectedReturnRange" class="range-slider" min="1" max="30" step="0.1" value="12">
+                    </div>
+                    
+                    <button type="button" id="calculateBtn" class="btn">Calculate SIP Returns</button>
+                </form>
+            </div>
+            
+            <div class="result-card">
+                <h2>Your SIP Results</h2>
+                <div id="resultsContainer">
+                    <div class="result-item">
+                        <span class="result-label">Total Investment</span>
+                        <span class="result-value" id="totalInvestment">₹6,00,000</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Estimated Returns</span>
+                        <span class="result-value" id="estimatedReturns">₹5,61,693</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Value</span>
+                        <span class="result-value highlight" id="totalValue">₹11,61,693</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Annualized Return</span>
+                        <span class="result-value" id="annualizedReturn">12.0%</span>
+                    </div>
+                </div>
+                
+                <!-- Chart Placeholder -->
+                <div id="chartContainer" style="margin-top: 30px; height: 250px;">
+                    <!-- Chart will be rendered here -->
+                    <canvas id="sipChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Middle Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+                crossorigin="anonymous"></script>
+            <!-- SIP Calculator Middle Rectangle -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <!-- Information Section -->
+        <section style="margin-top: 40px;">
+            <h2 style="color: var(--primary-color); margin-bottom: 20px;">Understanding SIP Investments</h2>
+            
+            <h3 style="margin: 20px 0 10px 0; color: var(--text-color);">What is SIP?</h3>
+            <p style="margin-bottom: 15px;">A Systematic Investment Plan (SIP) is an investment method offered by mutual funds where you can invest a fixed amount regularly (monthly, quarterly, etc.) instead of making a lump-sum investment. SIP allows you to invest small amounts periodically, benefiting from rupee cost averaging and compounding over time.</p>
+            
+            <h3 style="margin: 20px 0 10px 0; color: var(--text-color);">How SIP Calculator Works</h3>
+            <p style="margin-bottom: 15px;">Our SIP calculator uses the following formula to estimate your returns:</p>
+            <p style="background-color: var(--secondary-color); padding: 15px; border-radius: 5px; font-family: monospace; margin-bottom: 15px;">
+                FV = P × [{(1 + r)^n - 1} / r] × (1 + r)<br>
+                Where:<br>
+                FV = Future Value of investment<br>
+                P = Monthly investment amount<br>
+                r = Monthly expected return rate (annual rate/12)<br>
+                n = Total number of months (years × 12)
+            </p>
+            
+            <h3 style="margin: 20px 0 10px 0; color: var(--text-color);">Benefits of SIP</h3>
+            <ul style="margin-bottom: 15px; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Disciplined approach to investing</li>
+                <li style="margin-bottom: 8px;">Benefit from rupee cost averaging</li>
+                <li style="margin-bottom: 8px;">Power of compounding works in your favor</li>
+                <li style="margin-bottom: 8px;">Flexible investment amounts</li>
+                <li style="margin-bottom: 8px;">Convenient automatic investments</li>
+            </ul>
+        </section>
+        
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> The SIP calculator provides approximate results based on the inputs provided. The actual returns may vary depending on various factors including market risks. Past performance is not indicative of future returns. This calculator is for illustrative purposes only and does not constitute financial advice. Please consult with a financial advisor before making any investment decisions.
+        </div>
+        
+        <!-- Bottom Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your Google AdSense code -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+                crossorigin="anonymous"></script>
+            <!-- SIP Calculator Bottom Banner -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                data-ad-slot="YOUR_AD_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content container">
+            <p>&copy; <span id="currentYear"></span> Financial Tools. All rights reserved.</p>
+            <p style="margin-top: 10px;"><a href="/privacy" style="color: var(--light-text); text-decoration: none;">Privacy Policy</a> | <a href="/terms" style="color: var(--light-text); text-decoration: none;">Terms of Service</a></p>
+        </div>
+    </footer>
+    
+    <!-- Include Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Get DOM elements
+        const monthlyInvestment = document.getElementById('monthlyInvestment');
+        const monthlyInvestmentRange = document.getElementById('monthlyInvestmentRange');
+        const investmentPeriod = document.getElementById('investmentPeriod');
+        const investmentPeriodRange = document.getElementById('investmentPeriodRange');
+        const expectedReturn = document.getElementById('expectedReturn');
+        const expectedReturnRange = document.getElementById('expectedReturnRange');
+        const calculateBtn = document.getElementById('calculateBtn');
+        
+        // Result elements
+        const totalInvestmentEl = document.getElementById('totalInvestment');
+        const estimatedReturnsEl = document.getElementById('estimatedReturns');
+        const totalValueEl = document.getElementById('totalValue');
+        const annualizedReturnEl = document.getElementById('annualizedReturn');
+        
+        // Chart variables
+        let sipChart = null;
+        
+        // Sync range sliders with number inputs
+        monthlyInvestment.addEventListener('input', function() {
+            monthlyInvestmentRange.value = this.value;
+            calculateSIP();
+        });
+        
+        monthlyInvestmentRange.addEventListener('input', function() {
+            monthlyInvestment.value = this.value;
+            calculateSIP();
+        });
+        
+        investmentPeriod.addEventListener('input', function() {
+            investmentPeriodRange.value = this.value;
+            calculateSIP();
+        });
+        
+        investmentPeriodRange.addEventListener('input', function() {
+            investmentPeriod.value = this.value;
+            calculateSIP();
+        });
+        
+        expectedReturn.addEventListener('input', function() {
+            expectedReturnRange.value = this.value;
+            calculateSIP();
+        });
+        
+        expectedReturnRange.addEventListener('input', function() {
+            expectedReturn.value = this.value;
+            calculateSIP();
+        });
+        
+        // Calculate button click event
+        calculateBtn.addEventListener('click', calculateSIP);
+        
+        // Format currency
+        function formatCurrency(amount) {
+            return '₹' + amount.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+        }
+        
+        // Calculate SIP returns
+        function calculateSIP() {
+            const P = parseFloat(monthlyInvestment.value);
+            const n = parseFloat(investmentPeriod.value) * 12; // Convert years to months
+            const r = parseFloat(expectedReturn.value) / 100 / 12; // Monthly interest rate
+            
+            // Calculate future value
+            const futureValue = P * ((Math.pow(1 + r, n) - 1) / r * (1 + r);
+            const totalInvestment = P * n;
+            const estimatedReturns = futureValue - totalInvestment;
+            
+            // Calculate annualized return (CAGR)
+            const cagr = (Math.pow(futureValue / totalInvestment, 1 / (n / 12)) - 1) * 100;
+            
+            // Update results
+            totalInvestmentEl.textContent = formatCurrency(totalInvestment);
+            estimatedReturnsEl.textContent = formatCurrency(estimatedReturns);
+            totalValueEl.textContent = formatCurrency(futureValue);
+            annualizedReturnEl.textContent = cagr.toFixed(1) + '%';
+            
+            // Update chart
+            updateChart(P, n, r, futureValue);
+        }
+        
+        // Update chart
+        function updateChart(P, n, r, futureValue) {
+            const ctx = document.getElementById('sipChart').getContext('2d');
+            
+            // Prepare data for chart
+            const labels = [];
+            const investmentData = [];
+            const valueData = [];
+            
+            let invested = 0;
+            let currentValue = 0;
+            
+            for (let i = 1; i <= n; i++) {
+                if (i % 12 === 0 || i === 1 || i === n) {
+                    labels.push(`Year ${Math.ceil(i / 12)}`);
+                } else {
+                    labels.push('');
+                }
+                
+                invested += P;
+                currentValue = (currentValue + P) * (1 + r);
+                
+                if (i % 12 === 0 || i === 1 || i === n) {
+                    investmentData.push(invested);
+                    valueData.push(currentValue);
+                }
+            }
+            
+            // Destroy previous chart if exists
+            if (sipChart) {
+                sipChart.destroy();
+            }
+            
+            // Create new chart
+            sipChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Invested Amount',
+                            data: investmentData,
+                            backgroundColor: 'rgba(74, 107, 255, 0.7)',
+                            borderColor: 'rgba(74, 107, 255, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Investment Value',
+                            data: valueData,
+                            backgroundColor: 'rgba(255, 107, 107, 0.7)',
+                            borderColor: 'rgba(255, 107, 107, 1)',
+                            borderWidth: 1,
+                            type: 'line',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'SIP Growth Over Time',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += formatCurrency(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Calculate on page load
+        window.addEventListener('load', function() {
+            calculateSIP();
+        });
+    </script>
+</body>
+</html>
